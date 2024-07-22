@@ -1,0 +1,87 @@
+echo -n "Ingresa el host: "
+read host
+
+echo -n "Ingresa el puerto: "
+read puerto
+
+echo -n "ingresa el usuario: "
+read usuario
+
+if ssh -p $puerto $usuario@$host; then
+    echo "Conexión realizada exitosamente."
+else
+    echo "no se realiza la conexión. verifique el usuario, servidor y puerto"
+fi
+
+# ver carpetas del temp
+
+cd ..
+cd ..
+ls -las
+
+# Pedir al usuario que ingrese un archivo para mostrar su contenido
+read -p "Ingrese el nombre de un archivo para mostrar su contenido: " archivo
+if [ -n "$archivo" ]; then
+    echo "Contenido de $archivo:"
+    cat "$archivo"
+    echo ""
+fi
+
+# Determinar el tipo de archivo ingresado por el usuario
+if [ -n "$archivo" ]; then
+    echo "Tipo de archivo $archivo:"
+    file "$archivo"
+    echo ""
+fi
+
+# Mostrar el tamaño del directorio actual
+echo "Tamaño del directorio actual es:"
+du -sh
+
+# Encontrar archivos que cumplan cierto criterio en el directorio actual
+echo "Archivos .txt en $(pwd):"
+find . -name "*.txt"
+echo ""
+
+# Ingresar a la carpeta creada y crea sub carpetas
+cd /tmp
+cd melicoba
+touch prueba{1..3}.txt
+echo "cree un txt"
+echo " "
+
+ls -las
+
+# Ordenar y eliminar líneas duplicadas de un archivo
+read -p "Ingrese un archivo para ordenar y eliminar líneas duplicadas: " archivo_ordenar
+if [ -n "$archivo_ordenar" ]; then
+    echo "Contenido único y ordenado de $archivo_ordenar:"
+    sort -u "$archivo_ordenar"
+    echo ""
+fi
+ls -las
+
+# Codificar y decodificar texto en formato base64
+read -p "Ingrese texto para codificar en base64: " texto_base64
+if [ -n "$texto_base64" ]; then
+    echo "Texto codificado en base64:"
+    echo "$texto_base64" | base64
+    echo ""
+fi
+
+# Utilizar awk para manipular datos de texto
+echo "Uso de awk para procesar sumar datos:"
+echo "Datos ingrese 3 numeros:"
+echo "Alice 25" > datos.txt
+echo "Bob 30" >> datos.txt
+echo "Charlie 22" >> datos.txt
+cat datos.txt
+echo ""
+echo "Suma de edades usando awk:"
+awk '{ sum += $2 } END { print "Suma total de edades:", sum }' datos.txt
+echo ""
+awk '{ sum += $2 } END { print "Suma total de edades:", sum }'
+echo ""
+
+# Fin del script
+echo "Fin del programa."
