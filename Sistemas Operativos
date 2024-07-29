@@ -13,75 +13,109 @@ else
     echo "no se realiza la conexión. verifique el usuario, servidor y puerto"
 fi
 
+while true
+do
+    clear
+    echo "1) Ver el carpetas de la carpeta temporal"
+    echo "2) Mostrar el contenido de un archivo"
+    echo "3) Ver tamanio del archivo"
+    echo "4) Buscar un archivo"
+    echo "5) Ordenar archivo"
+    echo "6) Convertir a Base 64"
+    echo "6) Suma con AWK"
+    read opcion
+    case $opcion in
 # ver carpetas del temp
-
-cd ..
-cd ..
-ls -las
-
+        1) clear
+        echo "las carpetas dela carpeta temporal son:"
+        cd ..
+        cd ..
+        ls -las
+        echo "presione enter para continuar"
+        read tecla
 # Pedir al usuario que ingrese un archivo para mostrar su contenido
-read -p "Ingrese el nombre de un archivo para mostrar su contenido: " archivo
-if [ -n "$archivo" ]; then
-    echo "Contenido de $archivo:"
-    cat "$archivo"
-    echo ""
-fi
 
-# Determinar el tipo de archivo ingresado por el usuario
-if [ -n "$archivo" ]; then
-    echo "Tipo de archivo $archivo:"
-    file "$archivo"
-    echo ""
-fi
+        2) echo -n "ingrese el nombre del archivo a mostrar
+        read -p "Ingrese el nombre de un archivo para mostrar su contenido: " archivo
+        if [ -n "$archivo" ]; then
+            echo "Contenido de $archivo:"
+            cat "$archivo"
+            echo ""
+        fi
+        echo "presione enter para continuar"
+        read tecla
 
 # Mostrar el tamaño del directorio actual
-echo "Tamaño del directorio actual es:"
-du -sh
 
-# Encontrar archivos que cumplan cierto criterio en el directorio actual
-echo "Archivos .txt en $(pwd):"
-find . -name "*.txt"
-echo ""
-
+        3) echo -n "Tamanio del directorio"
+        echo "Tamaño del directorio actual es:"
+        du -sh
+        echo "presione enter para continuar"
+        read tecla
+    
+    # Encontrar archivos que cumplan cierto criterio en el directorio actual
+        4) echo -n "Ingresar el archivo a buscar"
+        echo "Archivos .txt en $(pwd):"
+        find . -name "*.txt"
+        echo ""
+        echo "presione enter para continuar"
+        read tecla
+        
 # Ingresar a la carpeta creada y crea sub carpetas
-cd /tmp
-cd melicoba
-touch prueba{1..3}.txt
-echo "cree un txt"
-echo " "
-
-ls -las
-
+        cd /tmp
+        cd melicoba
+        touch prueba{1..3}.txt
+        echo "cree un txt"
+        echo " "
+        
+        ls -las
+    
 # Ordenar y eliminar líneas duplicadas de un archivo
-read -p "Ingrese un archivo para ordenar y eliminar líneas duplicadas: " archivo_ordenar
-if [ -n "$archivo_ordenar" ]; then
-    echo "Contenido único y ordenado de $archivo_ordenar:"
-    sort -u "$archivo_ordenar"
-    echo ""
-fi
-ls -las
-
+        5) echo -n "Ordenar archivos"
+        read -p "Ingrese un archivo para ordenar y eliminar líneas duplicadas: " archivo_ordenar
+        if [ -n "$archivo_ordenar" ]; then
+            echo "Contenido único y ordenado de $archivo_ordenar:"
+            sort -u "$archivo_ordenar"
+            echo ""
+        fi
+        ls -las
+        echo "presione enter para continuar"
+        read tecla
+    
 # Codificar y decodificar texto en formato base64
-read -p "Ingrese texto para codificar en base64: " texto_base64
-if [ -n "$texto_base64" ]; then
-    echo "Texto codificado en base64:"
-    echo "$texto_base64" | base64
-    echo ""
-fi
-
+        6) echo -n "Codificar Texto"
+        read -p "Ingrese texto para codificar en base64: " texto_base64
+        if [ -n "$texto_base64" ]; then
+            echo "Texto codificado en base64:"
+            echo "$texto_base64" | base64
+            echo ""
+        fi
+        echo "presione enter para continuar"
+        read tecla
+    
 # Utilizar awk para manipular datos de texto
-echo "Uso de awk para procesar sumar datos:"
-echo "Datos ingrese 3 numeros:"
-echo "Alice 25" > datos.txt
-echo "Bob 30" >> datos.txt
-echo "Charlie 22" >> datos.txt
-cat datos.txt
-echo ""
-echo "Suma de edades usando awk:"
-awk '{ sum += $2 } END { print "Suma total de edades:", sum }' datos.txt
-echo ""
-awk '{ sum += $2 } END { print "Suma total de edades:", sum }'
-echo ""
-
-# Fin del script
-echo "Fin del programa."
+        7) echo -n "Proceso AWK"
+        echo "Uso de awk para procesar sumar datos:"
+        echo "Datos ingrese 3 numeros:"
+        echo "Alice 25" > datos.txt
+        echo "Bob 30" >> datos.txt
+        echo "Charlie 22" >> datos.txt
+        cat datos.txt
+        echo ""
+        echo "Suma de edades usando awk:"
+        awk '{ sum += $2 } END { print "Suma total de edades:", sum }' datos.txt
+        echo ""
+        awk '{ sum += $2 } END { print "Suma total de edades:", sum }'
+        echo ""
+        echo "presione enter para continuar"
+        read tecla
+        6) echo "Saliendo..."
+                exit 0
+                ;;
+                *) echo "$opcion no es válido. Por favor seleccione una opción del 1 al 6."
+                ;;
+            esac
+        done
+            # Fin del script
+        echo "Fin del programa."
+        
